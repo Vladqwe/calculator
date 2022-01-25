@@ -1,0 +1,19 @@
+import 'package:flutter/material.dart;
+class CalculatorUi extends StatefulWidget {
+  const CalculatorUi({Key key}) : super (key : key);
+  @override
+  _CalculatorUiState createState() => _CalculatorUi();
+  }
+  
+class _CalculatorUiState extends State<CalculatorUi>{
+  
+  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+    backgroundColor:
+    appBar: AppBar(
+      title: Text('Calculator'),
+      centerTitle: true,
+    body:
+  
