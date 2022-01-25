@@ -3,6 +3,10 @@
 import 'package:calcul/abstract%20class.dart';
 
 class MyCalc extends SimpleCalc{
+ String memory = '';
+  
+  
+  
   @override
   double divide(double a, double b) {
 
