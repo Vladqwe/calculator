@@ -6,7 +6,8 @@ class CalculatorUi extends StatefulWidget {
   }
   
 class _CalculatorUiState extends State<CalculatorUi>{
-  
+var userInput = '';
+var answer = '';  
   
   @override
   Widget build(BuildContext context) {
@@ -15,5 +16,21 @@ class _CalculatorUiState extends State<CalculatorUi>{
     appBar: AppBar(
       title: Text('Calculator'),
       centerTitle: true,
-    body:
-  
+    body: Column(
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        userInput,
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
+                    ),
+                  ]),
+       ),
+       ),
