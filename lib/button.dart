@@ -1,40 +1,48 @@
 import 'package:flutter/material.dart';
 
-// creating Stateless Widget for buttons
-class MyButton extends StatelessWidget {
+class NewButton extends StatelessWidget {
+  String text;
 
-// declaring variables
-  final color;
-  final textColor;
-  final String buttonText;
-  final buttontapped;
 
-//Constructor
-  MyButton({this.color, this.textColor, this.buttonText, this.buttontapped});
+
+  buttonPressed(String text){
+    print(text);
+  }
+
+  NewButton(this.text);
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: buttontapped,
-      child: Padding(
-        padding: const EdgeInsets.all(0.2),
-        child: ClipRRect(
-          // borderRadius: BorderRadius.circular(25),
-          child: Container(
-            color: color,
-            child: Center(
-              child: Text(
-                buttonText,
-                style: TextStyle(
-                  color: textColor,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
+    return Container(
+      margin: const EdgeInsets.all(6.0),
+      height: double.infinity,
+      width: double.infinity,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30.0),
+        color: Colors.orange,
+      ),
+      child: MaterialButton(
+        onPressed: () {
+          buttonPressed(text);
+        },
+        child: Text(
+          text,
+          style: const TextStyle(color: Colors.black, fontSize: 28.0),
         ),
       ),
     );
   }
 }
+© 2022 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About

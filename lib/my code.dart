@@ -2,9 +2,41 @@
 
 import 'package:calcul/abstract%20class.dart';
 
-class MyCalc extends SimpleCalc{
- String memory = '';
- double a  = double.parse(calculator.memory);
+class CalculatorUi extends SimpleCalc{
+ String input = '';
+ double firstValue;
+ String secondValue = '';
+ String operator = '';
+
+ void onPressed(value){
+   switch (value){
+     case 'AC':
+     case '+':
+     case '-':
+     case '/':
+     case '*':
+     case '=':
+     default:
+       if (isNumber(value)){
+         if (operator != '+' || operator !='-' || operator != '*' || operator != '/' ){
+           setState(() => input = calculator.input + value);
+            double firstValue = firstValue.parse(input);
+            else {
+           setState(() => input = calculator.input + value);
+           secondValue = input;
+         }
+
+
+         }
+       }
+   }
+ }
+
+
+
+
+
+
  
   
   

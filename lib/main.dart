@@ -2,184 +2,183 @@ import 'package:flutter/material.dart';
 import 'package:calcul/button.dart';
 import 'package:math_expressions/math_expressions.dart';
 
+
+
+
+
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomePage(),
-    ); // MaterialApp
+    return const MaterialApp(
+      title: 'Calculator',
+
+      home: CalculatorUi(),
+    );
   }
 }
 
-class HomePage extends StatefulWidget {
+class CalculatorUi extends StatefulWidget {
+  const CalculatorUi({Key? key}) : super(key: key);
+
   @override
-  _HomePageState createState() => _HomePageState();
+  CalculatorUiState createState() => CalculatorUiState();
 }
 
-class _HomePageState extends State<HomePage> {
-  var userInput = '';
-  var answer = '';
+class CalculatorUiState extends State<CalculatorUi> {
 
-// Array of button
-  final List<String> buttons = [
-    'C',
-    '+/-',
-    '%',
-    'DEL',
-    '7',
-    '8',
-    '9',
-    '/',
-    '4',
-    '5',
-    '6',
-    'x',
-    '1',
-    '2',
-    '3',
-    '-',
-    '0',
-    '.',
-    '=',
-    '+',
-  ];
+  final calculator = MyCalculator();
+
+
+  String output2 = '';
+  String action ='';
+  String result = '';
+
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new AppBar(
-        title: new Text("Calculator"),
-      ), //AppBar
-      backgroundColor: Colors.white38,
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: Container(
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.all(20),
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        userInput,
-                        style: TextStyle(fontSize: 18, color: Colors.white),
-                      ),
+        appBar: AppBar(
+          title: const Text('Calculator'),
+          centerTitle: true,
+        ),
+        body: Container(
+            color: Colors.black,
+            child: Column(
+              children: <Widget>[
+                Flexible(
+                  flex: 4,
+                  child: Container(
+                    height: double.infinity,
+                    width: double.infinity,
+                    color: Colors.white,
+                    alignment: Alignment.bottomRight,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 20,
+                      horizontal: 10,
                     ),
-                    Container(
-                      padding: EdgeInsets.all(15),
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        answer,
-                        style: TextStyle(
-                            fontSize: 30,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    )
-                  ]),
-            ),
-          ),
-          Expanded(
-            flex: 3,
-            child: Container(
-              child: GridView.builder(
-                  itemCount: buttons.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 4),
-                  itemBuilder: (BuildContext context, int index) {
-                    // Clear Button
-                    if (index == 0) {
-                      return MyButton(
-                        buttontapped: () {
-                          setState(() {
-                            userInput = '';
-                            answer = '0';
-                          });
-                        },
-                        buttonText: buttons[index],
-                        color: Colors.blue[50],
-                        textColor: Colors.black,
-                      );
-                    }
-
-                    // +/- button
-                    else if (index == 1) {
-                      return MyButton(
-                        buttonText: buttons[index],
-                        color: Colors.blue[50],
-                        textColor: Colors.black,
-                      );
-                    }
-                    // % Button
-                    else if (index == 2) {
-                      return MyButton(
-                        buttontapped: () {
-                          setState(() {
-                            userInput += buttons[index];
-                          });
-                        },
-                        buttonText: buttons[index],
-                        color: Colors.blue[50],
-                        textColor: Colors.black,
-                      );
-                    }
-                    // Delete Button
-                    else if (index == 3) {
-                      return MyButton(
-                        buttontapped: () {
-                          setState(() {
-                            userInput =
-                                userInput.substring(0, userInput.length - 1);
-                          });
-                        },
-                        buttonText: buttons[index],
-                        color: Colors.blue[50],
-                        textColor: Colors.black,
-                      );
-                    }
-                    // Equal_to Button
-                    else if (index == 18) {
-                      return MyButton(
-                        buttontapped: () {
-                          setState(() {
-                            equalPressed();
-                          });
-                        },
-                        buttonText: buttons[index],
-                        color: Colors.orange[700],
-                        textColor: Colors.white,
-                      );
-                    }
-
-                    // other buttons
-                    else {
-                      return MyButton(
-                        buttontapped: () {
-                          setState(() {
-                            userInput += buttons[index];
-                          });
-                        },
-                        buttonText: buttons[index],
-                        color: isOperator(buttons[index])
-                            ? Colors.blueAccent
-                            : Colors.white,
-                        textColor: isOperator(buttons[index])
-                            ? Colors.white
-                            : Colors.black,
-                      );
-                    }
-                  }), // GridView.builder
-            ),
-          ),
-        ],
-      ),
-    );
+                    child: Column(
+                      children: [
+                        Text(calculator.input,
+                            style: const TextStyle(
+                              fontSize: 60.0,
+                              fontWeight: FontWeight.bold,
+                            )),
+                        Text(action,
+                            style: const TextStyle(
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.bold,
+                            )),
+                        Text(output2,
+                            style: const TextStyle(
+                              fontSize: 60.0,
+                              fontWeight: FontWeight.bold,
+                            )),
+                        Text(result,
+                            style: const TextStyle(
+                              fontSize: 60.0,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ],
+                    ),
+                  ),
+                ),
+                Flexible(
+                  flex: 5,
+                  child: Container(
+                    color: Colors.black,
+                    child: Column(
+                      children: [
+                        Flexible(
+                          flex: 1,
+                          child: SizedBox(
+                            height: double.infinity,
+                            width: double.infinity,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Flexible(flex: 1, child: NewButton('AC')),
+                                Flexible(flex: 1, child: NewButton('')),
+                                Flexible(flex: 1, child: NewButton('%')),
+                                Flexible(flex: 1, child: NewButton('\u00F7')),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          flex: 1,
+                          child: SizedBox(
+                            height: double.infinity,
+                            width: double.infinity,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Flexible(flex: 1, child: NewButton('7')),
+                                Flexible(flex: 1, child: NewButton('8')),
+                                Flexible(flex: 1, child: NewButton('9')),
+                                Flexible(flex: 1, child: NewButton('\u00D7')),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          flex: 1,
+                          child: SizedBox(
+                            height: double.infinity,
+                            width: double.infinity,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Flexible(flex: 1, child: NewButton('4')),
+                                Flexible(flex: 1, child: NewButton('5')),
+                                Flexible(flex: 1, child: NewButton('6')),
+                                Flexible(flex: 1, child: NewButton('-')),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          flex: 1,
+                          child: SizedBox(
+                            height: double.infinity,
+                            width: double.infinity,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Flexible(flex: 1, child: NewButton('1')),
+                                Flexible(flex: 1, child: NewButton('2')),
+                                Flexible(flex: 1, child: NewButton('3')),
+                                Flexible(flex: 1, child: NewButton('+')),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          flex: 1,
+                          child: SizedBox(
+                            height: double.infinity,
+                            width: double.infinity,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Flexible(flex: 2, child: NewButton('0')),
+                                Flexible(flex: 1, child: NewButton('.')),
+                                Flexible(flex: 1, child: NewButton('=')),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            )));
   }
-
-
+}
