@@ -37,5 +37,9 @@ class MyCalc extends SimpleCalc{
     double result = a + b;
     return result;
   }
+  double procent(double a, double b) {
+    double result = (a * b)/100;
+    return result;
+  }
 
 }
