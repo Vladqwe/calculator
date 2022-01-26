@@ -4,6 +4,8 @@ import 'package:calcul/abstract%20class.dart';
 
 class MyCalc extends SimpleCalc{
  String memory = '';
+ double a  = double.parse(calculator.memory);
+ 
   
   
   
