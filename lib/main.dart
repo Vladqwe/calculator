@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:calcul/button.dart';
-import 'package:math_expressions/math_expressions.dart';
+
+import 'package:calcul/my code.dart';
 
 
 
@@ -32,12 +33,7 @@ class CalculatorUi extends StatefulWidget {
 
 class CalculatorUiState extends State<CalculatorUi> {
 
-  final calculator = MyCalculator();
 
-
-  String output2 = '';
-  String action ='';
-  String result = '';
 
 
 
@@ -45,140 +41,152 @@ class CalculatorUiState extends State<CalculatorUi> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Calculator'),
+          title: const Text('calculator'),
           centerTitle: true,
         ),
-        body: Container(
-            color: Colors.black,
-            child: Column(
-              children: <Widget>[
-                Flexible(
-                  flex: 4,
-                  child: Container(
-                    height: double.infinity,
-                    width: double.infinity,
-                    color: Colors.white,
-                    alignment: Alignment.bottomRight,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 20,
-                      horizontal: 10,
-                    ),
-                    child: Column(
-                      children: [
-                        Text(calculator.input,
-                            style: const TextStyle(
-                              fontSize: 60.0,
-                              fontWeight: FontWeight.bold,
-                            )),
-                        Text(action,
-                            style: const TextStyle(
-                              fontSize: 30.0,
-                              fontWeight: FontWeight.bold,
-                            )),
-                        Text(output2,
-                            style: const TextStyle(
-                              fontSize: 60.0,
-                              fontWeight: FontWeight.bold,
-                            )),
-                        Text(result,
-                            style: const TextStyle(
-                              fontSize: 60.0,
-                              fontWeight: FontWeight.bold,
-                            )),
-                      ],
-                    ),
-                  ),
-                ),
-                Flexible(
-                  flex: 5,
-                  child: Container(
-                    color: Colors.black,
-                    child: Column(
-                      children: [
-                        Flexible(
-                          flex: 1,
-                          child: SizedBox(
-                            height: double.infinity,
-                            width: double.infinity,
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Flexible(flex: 1, child: NewButton('AC')),
-                                Flexible(flex: 1, child: NewButton('')),
-                                Flexible(flex: 1, child: NewButton('%')),
-                                Flexible(flex: 1, child: NewButton('\u00F7')),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Flexible(
-                          flex: 1,
-                          child: SizedBox(
-                            height: double.infinity,
-                            width: double.infinity,
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Flexible(flex: 1, child: NewButton('7')),
-                                Flexible(flex: 1, child: NewButton('8')),
-                                Flexible(flex: 1, child: NewButton('9')),
-                                Flexible(flex: 1, child: NewButton('\u00D7')),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Flexible(
-                          flex: 1,
-                          child: SizedBox(
-                            height: double.infinity,
-                            width: double.infinity,
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Flexible(flex: 1, child: NewButton('4')),
-                                Flexible(flex: 1, child: NewButton('5')),
-                                Flexible(flex: 1, child: NewButton('6')),
-                                Flexible(flex: 1, child: NewButton('-')),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Flexible(
-                          flex: 1,
-                          child: SizedBox(
-                            height: double.infinity,
-                            width: double.infinity,
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Flexible(flex: 1, child: NewButton('1')),
-                                Flexible(flex: 1, child: NewButton('2')),
-                                Flexible(flex: 1, child: NewButton('3')),
-                                Flexible(flex: 1, child: NewButton('+')),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Flexible(
-                          flex: 1,
-                          child: SizedBox(
-                            height: double.infinity,
-                            width: double.infinity,
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Flexible(flex: 2, child: NewButton('0')),
-                                Flexible(flex: 1, child: NewButton('.')),
-                                Flexible(flex: 1, child: NewButton('=')),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            )));
-  }
+       body: Container(
+         color: Colors.black,
+
+         child: Column(
+         children: [
+
+
+           Expanded(
+             flex: 3,
+             child: _Display(
+
+             ),
+
+           ),
+
+         Expanded(
+         flex: 8,
+           child: Container(
+              child: _ButtonWidget(),
+           ),
+         )
+         ])
+
+       ),
+
+
+
+
+
+           );
+
+
+
 }
+  }
+
+ class _Display extends StatelessWidget {
+   const _Display({Key? key}) : super(key: key);
+
+   @override
+   Widget build(BuildContext context){
+     return Row(
+       crossAxisAlignment: CrossAxisAlignment.end,
+       mainAxisAlignment: MainAxisAlignment.end,
+
+
+       children: [Text('0',
+       style: TextStyle(color: Colors.white, fontSize: 50))],
+
+
+     );
+
+
+   }
+
+ }
+class _ButtonWidget extends StatelessWidget {
+  final List<String> buttons = [
+    'AC',
+    '+/-',
+    '%',
+    '/',
+    '7',
+    '8',
+    '9',
+    '+',
+    '4',
+    '5',
+    '6',
+    'x',
+    '1',
+    '2',
+    '3',
+    '-',
+    '0',
+    '.',
+    '=',
+
+  ];
+   _ButtonWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+        itemCount: buttons.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 4),
+    itemBuilder: (BuildContext context, int index) {
+      // Clear Button
+      if (index == 0) {
+        return MyButton(
+
+          buttonText: buttons[index],
+          color: Colors.grey,
+          textColor: Colors.black,
+        );
+      }
+
+      // +/- button
+      else if (index == 1) {
+        return MyButton(
+          buttonText: buttons[index],
+          color: Colors.grey,
+          textColor: Colors.black,
+        );
+      }
+      // % Button
+      else if (index == 2) {
+        return MyButton(
+
+          buttonText: buttons[index],
+          color: Colors.grey,
+          textColor: Colors.black,
+        );
+      }
+
+
+      // Equal_to Button
+      else if (index == 18 || index == 3 || index == 7 || index == 11 || index == 15) {
+        return MyButton(
+
+          buttonText: buttons[index],
+          color: Colors.orange[700],
+          textColor: Colors.white,
+        );
+      }
+
+      //  other buttons
+      else {
+        return MyButton(
+
+          buttonText: buttons[index],
+          color: Colors.white24,
+          textColor: Colors.white,
+
+        );
+      }
+    });
+
+
+      
+        
+
+
+
+  }}

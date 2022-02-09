@@ -1,48 +1,39 @@
 import 'package:flutter/material.dart';
 
-class NewButton extends StatelessWidget {
-  String text;
+class MyButton extends StatelessWidget {
+
+  // declaring variables
+  final color;
+  final textColor;
+  var  buttonText;
 
 
-
-  buttonPressed(String text){
-    print(text);
-  }
-
-  NewButton(this.text);
+  //Constructor
+  MyButton({this.color, this.textColor, required this.buttonText});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(6.0),
-      height: double.infinity,
-      width: double.infinity,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30.0),
-        color: Colors.orange,
-      ),
-      child: MaterialButton(
-        onPressed: () {
-          buttonPressed(text);
-        },
-        child: Text(
-          text,
-          style: const TextStyle(color: Colors.black, fontSize: 28.0),
+    return GestureDetector(
+
+      child: Padding(
+        padding: const EdgeInsets.all(0.2),
+        child: ClipRRect(
+          // borderRadius: BorderRadius.circular(25),
+          child: Container(
+            color: color,
+            child: Center(
+              child: Text(
+                buttonText,
+                style: TextStyle(
+                  color: textColor,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
         ),
       ),
     );
   }
 }
-© 2022 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About

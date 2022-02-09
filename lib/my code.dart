@@ -4,11 +4,11 @@ import 'package:calcul/abstract%20class.dart';
 
 class CalculatorUi extends SimpleCalc{
  String input = '';
- double firstValue;
+ double firstValue = 0;
  String secondValue = '';
  String operator = '';
 
- void onPressed(value){
+ /*void onPressed(value){
    switch (value){
      case 'AC':
      case '+':
@@ -40,7 +40,7 @@ class CalculatorUi extends SimpleCalc{
  
   
   
-  
+  */
   @override
   double divide(double a, double b) {
 
